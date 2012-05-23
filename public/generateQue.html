@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DAA PROJECT</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<link rel="stylesheet" type="text/css" href="header.css" media="all" />
+
+<script language="javascript" type="text/javascript" src="jquery.js"></script>
+
+<style>
+.code
+{
+	white-space:break-word;
+	width:500px;
+	height:100px;
+	background-color:#F0F0F0;
+	overflow:auto;
+}
+</style>
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+    
+    <link rel="stylesheet" type="text/css" href="generateQue.css" media="all" />
+    
+	<div id="form_container">
+    
+		<form id="form_post_submit" class="appnitro" method="post" action="generateque">
+			<div class="form_description">
+			
+                <table class="header_separator">
+                    <tr>
+                        <td class="header_separator"><h2 id="heading" style="background-color: #E6E6E6;" contenteditable="true" class="header">Task Details</h2></td>
+                        <td class="header_separator submit" style="text-align:center;"><input type="image" alt="Schedule" src="submit.jpg"/></td>
+                    </tr>
+                </table>
+				
+			<br />
+				
+			<p>Task Scheduling Using Greedy Algorithm</p>
+			
+			</div>
+
+			<pre><span class="task_heading">Que Size	|	<?php echo $this->qSize; ?></span><br /></pre>
+            <pre><span class="task_heading">No. Of Tasks	|	<?php echo $this->tSize; ?></span></pre>
+            
+			
+            <span class="task_heading">Que With On Time Tasks</span>	
+			<pre>
+            <table class="task" id="task_table_unsorted" width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $onTimeQueNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $onTimeQueDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight	|</td>
+                    <?php echo $onTimeQueWs; ?>
+                </tr>
+            </table>
+            </pre>
+
+            <span class="task_heading">List Of Pending Tasks</span>
+            <pre>
+            <table class="task" id="task_table_ssorted" width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $pendingTasksNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $pendingTasksDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight	|</td>
+                    <?php echo $pendingTasksWs; ?>
+                </tr>
+            </table>
+            </pre>
+            
+            <span class="task_heading">List Of Pending Tasks Ordered By Ascending Deadline Time</span>
+            <pre>
+            <table class="task" id="task_table_ssorted" width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $pendingTasksSortedNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $pendingTasksSortedDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight	|</td>
+                    <?php echo $pendingTasksSortedWs; ?>
+                </tr>
+            </table>
+            </pre>
+            
+            <span class="task_heading">Final Que</span>
+            <pre>
+            <table class="task" id="task_table_ssorted" width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $finalQueNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $finalQueSortedDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight	|</td>
+                    <?php echo $finalQueSortedWs; ?>
+                </tr>
+            </table>
+            </pre>
+            
+           <div style="width:100%; text-align:right;"><input type="image" alt="Schedule" src="generateTask.schedule.png" height="30"/></div>
+		</form>	 
+	</div>
+    
+    <script language="javascript" type="text/javascript" src="generateTask.js"></script>
+	
+	<img id="bottom" src="bottom.png" alt="">
+    
+	</body>
+</html>

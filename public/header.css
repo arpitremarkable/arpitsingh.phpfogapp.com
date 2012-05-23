@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+table.header
+{
+	text-align:center;
+	display:inline;
+}
+
+td.header
+{
+	color:#00CC33;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+td.username
+{
+	color:#009933;
+	font-weight:bolder;
+	font-size:12px;
+}
+
+a.header
+{
+	color:#000000;
+	font-weight:bold;
+	font-size:12px;	
+}
+
+h2.header
+{
+	display:inline;
+}
+
+table.header_separator
+{
+	width:650px
+}
+
+td.header_separator
+{
+	width:350px;
+}
+
+
+
+
+//////////////////////////GLOBALS//////////////////////////
+

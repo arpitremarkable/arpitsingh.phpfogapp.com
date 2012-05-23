@@ -1,0 +1,112 @@
+<?php
+
+function generateNameRowsFromTasks($tasks)
+{
+	
+	$ret = '';
+	foreach($tasks as $task)
+	{	
+		$ret = $ret.'<td class="task_name value">'.$task->name().'</td>
+		';
+	}
+	
+	return $ret;
+}
+
+function generateDRowsFromTasks($tasks)
+{
+	
+	$ret = '';
+	foreach($tasks as $task)
+	{	
+		$ret = $ret.'<td class="task_d value">'.$task->d().'</td>
+		';
+	}
+	
+	return $ret;
+}
+
+function generateWRowsFromTasks($tasks)
+{
+	
+	$ret = '';
+	foreach($tasks as $task)
+	{	
+		$ret = $ret.'<td class="task_w value">'.$task->w().'</td>
+		';
+	}
+	
+	return $ret;
+}
+
+$unSortedNames = generateNameRowsFromTasks($this->tasksUnSorted);
+$unSortedDs = generateDRowsFromTasks($this->tasksUnSorted);
+$unSortedWs = generateWRowsFromTasks($this->tasksUnSorted);
+
+$sortedNames = generateNameRowsFromTasks($this->tasksSorted);
+$sortedDs = generateDRowsFromTasks($this->tasksSorted);
+$sortedWs = generateWRowsFromTasks($this->tasksSorted);
+
+?>
+
+    <link rel="stylesheet" type="text/css" href="generateTask.css" media="all" />
+    
+	<div id="form_container">
+    
+		<form id="form_post_submit" class="appnitro" method="post" action="generateque">
+			<div class="form_description">
+			
+                <table class="header_separator">
+                    <tr>
+                        <td class="header_separator"><h2 id="heading" style="background-color: #E6E6E6;" contenteditable="true" class="header">Task Details</h2></td>
+                        <td class="header_separator submit" style="text-align:center;"><input type="image" alt="Schedule" src="submit.jpg"/></td>
+                    </tr>
+                </table>
+				
+			<br />
+				
+			<p>Task Scheduling Using Greedy Algorithm</p>
+			
+			</div>
+
+            <span class="task_heading">List Of Tasks</span>	
+			<pre>
+            <table class="task" id="task_table_unsorted" width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $unSortedNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $unSortedDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight&nbsp;&nbsp;&nbsp;</td>
+                    <?php echo $unSortedWs; ?>
+                </tr>
+            </table>
+			</pre>
+
+            <span class="task_heading">Sorted List Of Tasks, Ordered By Descending Weights</span>
+			<pre>
+            <table class="task" id="task_table_ssorted"  width="100%" border="0">
+            	<tr>
+                	<td class="task_name label">Name	|</td>
+                    <?php echo $sortedNames; ?>
+                </tr>
+                <tr>
+                	<td class="task_d label">Deadline|</td>
+                    <?php echo $sortedDs; ?>
+                </tr>
+                <tr>
+                	<td class="task_w label">Weight	|</td>
+                    <?php echo $sortedWs; ?>
+                </tr>
+            </table>
+            </pre>
+
+           <div style="width:100%; text-align:right;"><input type="image" alt="Schedule" src="generateTask.schedule.png" height="30"/></div>
+		</form>	 
+	</div>
+    
+    <script language="javascript" type="text/javascript" src="generateTask.js"></script>

@@ -1,0 +1,95 @@
+span.task_heading
+{
+	padding-left:2px;
+	background-color:#EEEEEE;
+	display:inline;
+}
+
+input.input_name_reset
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#FEFEDD;
+	color:#A0A0A0;
+	text-transform:lowercase;
+	font-style:italic;
+}
+
+input.input_d_reset
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#FFEEDD;
+	color:#A0A0A0;
+	text-transform:lowercase;
+	font-style:italic;
+}
+
+input.input_w_reset
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#EEFFDD;
+	color:#A0A0A0;
+	text-transform:lowercase;
+	font-style:italic;
+}
+
+input.input_name
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#EDEDCC;
+	color:#A0A0A0;
+	font-weight:bold;
+}
+
+input.input_d
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#EEDDCC;
+	color:#A0A0A0;
+	font-weight:bold;
+}
+
+input.input_w
+{
+	padding-left:5px;
+	border-top:none;
+	border-left:none;
+	background:#DDEECC;
+	color:#A0A0A0;
+	font-weight:bold;
+}
+
+td.add_task
+{
+	background:url(addTask.png) no-repeat;
+	height:50px;
+	width:30%;
+	text-align:center;
+}
+
+td img
+{
+	cursor:pointer;	
+}
+
+td.sub_task
+{
+	background:url(subTask.png) no-repeat;
+	height:50px;
+	width:30%;
+	text-align:center;
+}
+
+.hidden
+{
+	display:none;
+}

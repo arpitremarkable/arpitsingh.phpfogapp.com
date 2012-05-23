@@ -1,0 +1,67 @@
+.task
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+	
+	//display:block;
+}
+
+.task_name
+{
+	background:#FEFEDD;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.task_d
+{
+	background:#FFEEDD;
+}
+
+.task_w
+{
+	background:#EEFFDD;
+}
+
+.label
+{
+	font-weight:bold;
+	color:#999999;
+	font-size:inherit;
+	padding:3px;
+}
+
+.value
+{
+	color:#7799DD;
+}
+
+span.task_heading
+{
+	padding-left:2px;
+	background-color:#EEEEEE;
+	display:inline;
+	margin:10px;
+	display:inline-block;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.late
+{
+	background:#FFAAAA;
+	font-weight:bold;
+	color:#0000FF;
+}
+
+.sum
+{
+	font-weight:bolder;
+	color:#333366;
+}
+
+.weight
+{
+	font-weight:normal;
+	font-size:12px;
+}

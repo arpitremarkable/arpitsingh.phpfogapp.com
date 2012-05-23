@@ -1,0 +1,209 @@
+<?php
+
+class GenerateQueController extends Zend_Controller_Action
+{
+	private $session;
+
+    public function init()
+    {
+        /* Initialize action controller here */
+		include_once("/../../library/Task.php");
+		include_once("/../../library/Que.php");
+    }
+	
+	public function printAll($tasks)
+	{
+		foreach($tasks as $s)
+		{
+			$s->printAll();
+		}
+	}
+	
+	public function printQue($que)
+	{
+		echo "<br>name		d		w		isOnTime";
+		$locs = $que->loc;
+		foreach($locs as $q)
+		{
+			$bookedBy = $q->isBookedBy();
+			echo "<br>".$bookedBy->name()."		".$bookedBy->d(),"		".$bookedBy->w()."		".$bookedBy->isOnTime();
+		}
+	}
+	
+	public function generateTasks($que)
+	{
+		$tasks = array();$i=0;
+		
+		//assigning scheduled list of tasks
+		foreach($que->loc as $memLoc)
+		{
+			$bookedBy = $memLoc->isBookedBy();
+			$tasks[$i++] = $bookedBy;
+		}
+		//$this->printQue($tasks);
+		return $tasks;
+		
+		//$this->printQue($sortedTasks);
+		
+		//$this->printQue($finalTasks);
+		
+		//return $this->convertToQue($finalTasks);
+	}
+	
+	public function sortResult($tasks)
+	{
+		$size = count($tasks);
+		$sorted = array();
+		
+		while(!empty($tasks))
+		{
+			$max = -1; $flag=0;$i=0;
+			
+			foreach($tasks as $task)
+			{
+				if($task->d()>$max)
+				{
+					$max = $task->d();
+					$flag = $i;
+				}
+				$i++;
+			}
+			
+			//echo "greatest = $max at $flag<br>";
+			array_push($sorted,$tasks[$flag]);
+			$tasks[$flag] = $tasks[count($tasks)-1];
+			array_pop($tasks);
+		}
+		return array_reverse($sorted);
+	}
+
+	public function separateResult($tasks)
+	{
+		$final = array();
+		foreach($tasks as $task)
+		{
+			if($task->isOnTime())
+				array_push($final, $task);
+		}
+		
+		foreach($tasks as $task)
+		{
+			if(!$task->isOnTime())
+				array_push($final, $task);
+		}
+		
+		return $final;
+	}
+	
+	public function generateResult($tasks)
+	{
+		//count number of tasks on time / inside independant set
+			$countOfOnTimeTasks = 0;
+			foreach($tasks as $task)
+				{
+					if($task->isOnTime())
+						$countOfOnTimeTasks++;
+				}
+					
+		$flag = $countOfOnTimeTasks;
+		echo $flag;
+		
+		//shifting tasks completing before deadline to the deadline
+		while($flag > 0)
+		{
+			$flag--;
+			$d = $tasks[$flag]->d();
+			$pos = $tasks[$flag]->pos();
+			echo "<br>d	".$d."";
+			if($d > $pos)
+			{
+				echo "	$d greater than $pos and flag is $flag";
+				$ptr1 = $flag;
+				$ptr2 = $flag+1;
+				
+				while($ptr2 < count($tasks))
+				{
+					if($tasks[$ptr2]->d() < $tasks[$ptr1]->d())
+					{
+						//swap
+						$pos = $ptr2+1;$tasks[$ptr1]->schedule($pos);
+						$pos = $ptr1+1;$tasks[$ptr2]->schedule($pos);
+						
+						$temp = $tasks[$ptr2];$tasks[$ptr2] = $tasks[$ptr1];$tasks[$ptr1] = $temp;
+						$ptr1=$ptr2;
+						$ptr2++;
+					}
+					if($tasks[$ptr1]->d() <= $tasks[$ptr1]->pos())
+						break;
+				}
+			}
+		}
+			
+			
+		//$result = array();	*/
+		return $tasks;
+	}
+	
+	public function indexAction()
+    {
+		session_start();
+		
+		//receiving tasks
+		$tasks = unserialize($_SESSION['tasks']);
+		
+		var_dump($tasks);
+		
+		//initializing que
+		$que = new Que($tasks);
+		$size = $que->printSize(false);
+		$toIterate = count($tasks);
+		echo "$size here";
+		
+		$this->printAll($tasks);
+		
+		//scheduling
+		for($i=0;$i<$toIterate;$i++)
+		{
+			echo "<br /> $i";
+			$flag = $tasks[$i]->d() - 1;
+			
+			echo $flag;
+			
+			while(!$tasks[$i]->isScheduled())
+			{
+				if(!$que->loc[$flag]->isBooked())
+				{
+					$pos = $flag+1;
+					//echo "loc $pos is free......booking for {$tasks[$i]->name()}<br>";
+					$que->loc[$flag]->booking($tasks[$i]);
+					$tasks[$i]->schedule($pos);
+				}				
+				else
+				{
+					if($flag == 0)
+						$flag = $size;
+					$flag--;
+				}
+			}
+		}
+		echo "after";$this->printQue($que);echo "before";
+		//generate list of tasks from que
+		$generatedTasks = $this->generateTasks($que);
+		
+		//sorting scheduled task list in ascending order of deadline
+		$sortedTasks = $this->sortResult($generatedTasks);
+		
+		//Separating list of independant set with the rest
+		$separatedResult = $this->separateResult($sortedTasks);
+		
+		$this->printQue($separatedResult);
+		
+		//create final result by chosing best option among all possibilities of scheduling
+		//$generatedResult = $this->generateResult($separatedResult);
+		
+		//$this->printQue($generatedResult);
+    }
+
+}
+
+
